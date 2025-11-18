@@ -1,0 +1,64 @@
+﻿<Window x:Class="Labb3_Quiz.MainWindow"
+        Closing="Window_Closing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Labb3_Quiz"
+        xmlns:views="clr-namespace:Labb3_Quiz.Views"
+        xmlns:conv="clr-namespace:Labb3_Quiz.Converters" 
+        xmlns:viewmodels="clr-namespace:Labb3_Quiz.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        mc:Ignorable="d"
+        Icon="Assets/quiz1.ico"
+        d:Height="450" d:Width="800"
+        Title="MainWindow" Height="450" Width="800" FontSize="24" >
+
+    <Window.InputBindings>
+        <KeyBinding 
+            Command="{Binding ToggleFullscreenCommand}" 
+            Gesture="Alt+Enter" />
+        <KeyBinding 
+            Command="{Binding ExitCommand}" 
+            Gesture="Alt+F4" />
+        <KeyBinding 
+            Command="{Binding PlayCommand}" 
+            Gesture="Ctrl+P" />
+        <KeyBinding 
+            Command="{Binding OpenPackOptionsCommand}" 
+            Gesture="Ctrl+O" />
+        <KeyBinding 
+            Command="{Binding NewQuestionCommand}" 
+            Gesture="Insert" />
+        <KeyBinding 
+            Command="{Binding RemoveQuestionCommand}"
+            CommandParameter="{Binding ConfigurationViewModel.ActiveQuestion}"
+            Gesture="Ctrl+R" />
+        <KeyBinding 
+            Command="{Binding RemoveQuestionCommand}"
+            CommandParameter="{Binding ConfigurationViewModel.ActiveQuestion}"
+            Gesture="Delete" />
+        <KeyBinding 
+            Command="{Binding EditCommand}"
+            Gesture="Ctrl+E" />
+
+    </Window.InputBindings>
+
+    <Window.Resources>
+        <conv:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+        </Menu>
+        <views:MenuView Grid.Row="0" />
+        <ContentControl Grid.Row="1"
+                    Content="{Binding CurrentView}"
+                    Margin="10" />
+    </Grid>
+</Window>
