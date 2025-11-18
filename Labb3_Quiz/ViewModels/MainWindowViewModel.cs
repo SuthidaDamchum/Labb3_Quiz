@@ -90,7 +90,6 @@ namespace Labb3_Quiz.ViewModels
             Player = new PlayerViewModel(this);
             _jsonService = new JsonService();
             ReloadPacks();
-
             ToggleFullscreenCommand = new DelegateCommand(_ => ToggleFullscreen());
 
             NewPackCommand = new DelegateCommand(_ => CreateNewPack());
@@ -241,11 +240,11 @@ namespace Labb3_Quiz.ViewModels
             _jsonService.AddToFile(allModels);
         }
 
-        private void ReloadPacks()
+        public async Task ReloadPacks()
         {
             Packs.Clear();
 
-            var loadedPacks = _jsonService.ReadFile();
+            var loadedPacks = await _jsonService.ReadFile();
 
             if (loadedPacks.Length == 0)
             {

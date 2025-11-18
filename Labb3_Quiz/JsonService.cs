@@ -6,21 +6,19 @@ namespace Labb3_Quiz.Helpers
 {
     public class JsonService
     {
-        private IEnumerable<QuestionPack> newPacks;
-
-        public void AddToFile(QuestionPack[] questionPack)
+        public async void AddToFile(QuestionPack[] questionPack)
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Suthidas_Labb3");
             if (!Directory.Exists(root) == false)
                 Directory.CreateDirectory(root);
 
             var fileName = Path.Combine(root, "QuestionPacks.json");
+            await using FileStream stream = File.Create(fileName);
 
-            var combinedJson = JsonSerializer.Serialize(questionPack);
-            File.WriteAllText(fileName, combinedJson);
+            await JsonSerializer.SerializeAsync<QuestionPack[]>(stream, questionPack);
         }
 
-        public QuestionPack[]? ReadFile()
+        public async Task<QuestionPack[]?> ReadFile()
         {
             var root = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -35,9 +33,9 @@ namespace Labb3_Quiz.Helpers
 
             try
             {
-                var jsonstring = File.ReadAllText(fileName);
-                return JsonSerializer.Deserialize<QuestionPack[]>(jsonstring) ?? Array.Empty<QuestionPack>();
-            }
+                using var stream = File.OpenRead(fileName);
+                return await JsonSerializer.DeserializeAsync<QuestionPack[]?>(stream);
+             }
             catch (Exception e)
             {
 

@@ -25,4 +25,12 @@ public partial class MainWindow : Window
                 vm.ExitCommand.Execute(null);
         }
     }
+
+    private async Task Window_Opened(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel vm)
+        {
+            await vm.ReloadPacks();
+        }
+    }
 }

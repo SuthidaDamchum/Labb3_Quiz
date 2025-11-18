@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Labb3_Quiz"
              xmlns:vm="clr-namespace:Labb3_Quiz.ViewModels"
-             xmlns:views="clr-namespace:Labb3_Quiz.Views"
-             StartupUri="MainWindow.xaml">
+             xmlns:views="clr-namespace:Labb3_Quiz.Views">
     
     <Application.Resources>
         <DataTemplate DataType="{x:Type vm:ConfigurationViewModel}">
