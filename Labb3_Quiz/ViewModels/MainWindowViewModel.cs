@@ -89,9 +89,7 @@ namespace Labb3_Quiz.ViewModels
         {
             Player = new PlayerViewModel(this);
             _jsonService = new JsonService();
-            ReloadPacks();
             ToggleFullscreenCommand = new DelegateCommand(_ => ToggleFullscreen());
-
             NewPackCommand = new DelegateCommand(_ => CreateNewPack());
 
             SavePackCommand = new DelegateCommand(_ => SaveAllPacks());

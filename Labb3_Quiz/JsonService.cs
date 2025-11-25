@@ -9,7 +9,7 @@ namespace Labb3_Quiz.Helpers
         public async void AddToFile(QuestionPack[] questionPack)
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Suthidas_Labb3");
-            if (!Directory.Exists(root) == false)
+            if (Directory.Exists(root) == false)
                 Directory.CreateDirectory(root);
 
             var fileName = Path.Combine(root, "QuestionPacks.json");
